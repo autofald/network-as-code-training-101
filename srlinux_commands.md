@@ -4,3 +4,8 @@
 
 # Fermer la connexion
     quit
+
+# Modifier la configuration candidate
+    enter candidate
+
+    set/delete *

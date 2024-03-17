@@ -1,0 +1,38 @@
+---
+- name: Run commands on remote cEOS-lab device
+  hosts: ceos
+  connection: network_cli
+  gather_facts: no
+  vars:
+    ansible_python_interpreter: "python"
+    ansible_network_os: 'eos'
+  tasks:
+
+    - name: Execute Arista EOS command
+      eos_command:
+        commands: show version
+      register: version
+
+    - name: Display result
+      debug:
+        msg: "{{ version.stdout[0] }}"
+
+- name: Run commands on remote cEOS-lab device
+  hosts: ceos
+  connection: netconf
+  gather_facts: no
+  vars:
+    ansible_python_interpreter: "python"
+    ansible_network_os: 'eos'
+  tasks:
+
+    - name: GETTING LIST OF ALL SUPPORTED YANG MODULES FROM {{ inventory_hostname }}
+      netconf_get:
+        display: xml
+        filter: <netconf-state xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring"><schemas><schema/></schemas></netconf-state>
+        lock: never
+      register: list_of_schemas
+
+    - name: Display result
+      debug:
+        msg: "{{ list_of_schemas }}"
