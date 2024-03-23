@@ -15,7 +15,7 @@
 
     - name: Display result
       debug:
-        msg: "{{ version.stdout[0] }}"
+        msg: "{{ version.stdout }}"
 
 - name: Run commands on remote cEOS-lab device
   hosts: ceos
@@ -26,13 +26,18 @@
     ansible_network_os: 'eos'
   tasks:
 
-    - name: GETTING LIST OF ALL SUPPORTED YANG MODULES FROM {{ inventory_hostname }}
+    - name: Get list of availables YANG schema
       netconf_get:
-        display: xml
-        filter: <netconf-state xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring"><schemas><schema/></schemas></netconf-state>
+        display: pretty
+        filter: |
+            <netconf-state xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring">
+                <schemas>
+                    <schema/>
+                </schemas>
+            </netconf-state>
         lock: never
       register: list_of_schemas
 
-    - name: Display result
+    - name: Display list of availables YANG schema
       debug:
-        msg: "{{ list_of_schemas }}"
+        msg: "{{ list_of_schemas.output }}"

@@ -5,4 +5,6 @@ show ip int brief
 
 enable
 
+show configuration
+
 configure

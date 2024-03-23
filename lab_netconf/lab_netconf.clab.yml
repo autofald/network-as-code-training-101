@@ -26,15 +26,9 @@ topology:
       mgmt-ipv4: 172.100.100.5
       mgmt-ipv6: 2001:172:100:100::5
       binds:
-        - ansible:/workdir
+        - workdir:/workdir
         - clab-lab_netconf/ansible-inventory.yml:/etc/ansible/hosts
       entrypoint: tail -f /dev/null
-      #exec:
-      # - ip address add 192.168.1.5/24 dev eth1
-    #br-clab:
-    # kind: bridge
+
   links:
-#    - endpoints: ["lab-mgmt:eth1", "br-clab:eth1"]
-#    - endpoints: ["sw1:eth1", "br-clab:eth2"]
-#    - endpoints: ["sw2:e1-1", "br-clab:eth3"]
     - endpoints: ["sw1:eth1", "sw2:e1-1"]

@@ -11,6 +11,8 @@
 
 * Installer containerlab
 
+        [Documentation d'installation de Containerlab](https://containerlab.dev/install/#__tabbed_1_1)
+
 * Récupérer l'image SR-LINUX :
 
         docker pull ghcr.io/nokia/srlinux:23.10.2
@@ -37,6 +39,9 @@ Lancement de playbooks
 
     docker exec clab-lab_netconf-lab-mgmt ansible-playbook get-version.yml
 
+Lancement d'un script python
+
+    docker exec clab-lab_netconf-lab-mgmt python ncclient_exemple.py
 
 ## 2) Découverte du protocole NETCONF
 
@@ -44,7 +49,7 @@ Lancement de playbooks
 
 :question: Affichez la configuration Netconf de sw1 en CLI
 
-:question: Vérifier que l'interface de management NETCOFN est bien opérationnel
+:question: Vérifier que l'interface de management NETCONF est bien opérationnelle
 
 ### 2.2) Ouverture d'une session NETCONF avec sw1 avec ssh
 
@@ -85,7 +90,7 @@ Les modèles YANG utilisables sur EOS sont disponibles ici : [YANG models](https
 
 La RFC qui décrit les opérations et paramètres en NETCONF est ici : [RFC 6241](https://datatracker.ietf.org/doc/html/rfc6241)
 
-Outil pour explorer les modèles YANG openConfig : [OpenConfig schema path](https://openconfig.net/projects/models/paths/)
+Un outil utile pour explorer les modèles YANG openConfig : [OpenConfig schema path](https://openconfig.net/projects/models/paths/)
 
 :question: Quelle est la requête pour récupérer la liste des utilisateurs ?
 
@@ -95,20 +100,22 @@ Outil pour explorer les modèles YANG openConfig : [OpenConfig schema path](http
 
 :question: Quelle est la requête pour récupérer l'état opérationnel de la session BGP 192.168.1.1 dans la GRT ?
 
-### 2.3) Modification de configuration
+### 2.4) Modification de configuration
 
 :question: Quelle sont les requêtes nécessaire pour :
-  * vérouiller le datastore de configuration "candidate"
+
+  * vérrouiller le datastore de configuration "candidate"
   * modifier la description de l'interface "Ethernet1"
+  * récupérer la description de l'interface "Ethernet1" dans le datastore candidate
   * commit la modification
   * déverouiller le datastore de configuration "candidate"
+  * récupérer la description de l'interface "Ethernet1" dans le datastore running
 
-
-### 2.4) Utilisation de python
+### 2.5) Utilisation de python
 
 On utilise en générale l'accès netconf via un shell que pour du debug. L'interet de NETCONF est surtout pour des scripts ou outils d'automatisation.
 
-Nous allons donc ici ecrire en python un petit script qui va effectuer les actions suivantes :
+:question: écrire en python un petit script qui va effectuer les actions suivantes :
 
 1. récupérer la liste des interfaces avec leur statut et description
 2. configuer une nouvelle interface "Ethernet2"
@@ -116,4 +123,8 @@ Nous allons donc ici ecrire en python un petit script qui va effectuer les actio
 
 La bibliothèque la plus utilisé en python pour faire du netconf est ncclient : [documentation](https://ncclient.readthedocs.io/en/latest/)
 
-Le containeur "python" instancie l'image 
+
+
+### 2.5) Utilisation d'ansible
+
+:question: En utilisant les modules ansible.netcommon.netconf_*, 
