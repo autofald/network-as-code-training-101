@@ -38,6 +38,6 @@
         lock: never
       register: list_of_schemas
 
-    - name: Display list of availables YANG schema
+    - name: Display the list of availables YANG schema
       debug:
         msg: "{{ list_of_schemas.output }}"

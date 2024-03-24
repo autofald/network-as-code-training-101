@@ -20,15 +20,5 @@ topology:
       mgmt-ipv4: 172.100.100.3
       mgmt-ipv6: 2001:172:100:100::3
       startup-config: startup-configs/sw2.cfg
-    lab-mgmt:
-      kind: linux
-      image: lab-mgmt
-      mgmt-ipv4: 172.100.100.5
-      mgmt-ipv6: 2001:172:100:100::5
-      binds:
-        - ansible:/workdir
-        - clab-lab_netconf/ansible-inventory.yml:/etc/ansible/hosts
-      entrypoint: tail -f /dev/null
-
   links:
     - endpoints: ["sw1:eth1", "sw2:e1-1"]

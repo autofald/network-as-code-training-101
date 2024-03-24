@@ -127,4 +127,6 @@ La bibliothèque la plus utilisé en python pour faire du netconf est ncclient :
 
 ### 2.5) Utilisation d'ansible
 
-:question: En utilisant les modules ansible.netcommon.netconf_*, 
+:question: En utilisant les modules ansible.netcommon.netconf_*, créer un playbook qui va générer l'ensemble de la configuration cible de sw1, permettre de vérifier si la configuration désirée est bien appliquée (audit) et redéployer la configuration cible sur l'équipement.
+
+:question: En utilisant les modules ansible.netcommon.netconf_*, créer un playbook qui va valider que les états opérationnels de l'équipement sont bien ceux attendus (assurance) : état des interfaces, état de la session BGP
